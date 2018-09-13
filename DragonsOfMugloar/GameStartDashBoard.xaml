@@ -1,0 +1,62 @@
+﻿<Page x:Class="DragonsOfMugloar.GameStartDashBoard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DragonsOfMugloar"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GameStartDashBoard">
+
+    <Grid Margin="0,0,-602,-119" Background="#FFDED7BC">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="263*"/>
+            <ColumnDefinition Width="1139*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="StartNewGameButton" Content="Start new game!" HorizontalAlignment="Left" Margin="86,475,0,0" VerticalAlignment="Top" Width="165" Height="47" Click="StartNewGameButton_Click" Background="#FFC9B97D" />
+        <TextBox x:Name="GameDataJsonTextBox" HorizontalAlignment="Left" Height="115" Margin="51,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211"/>
+        <!--<TextBox x:Name="StartingLivesTextBox" HorizontalAlignment="Left" Height="23" Margin="174,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
+        <!--<TextBox x:Name="StartingGoldTextBox" HorizontalAlignment="Left" Height="23" Margin="174,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
+        <!--<TextBox x:Name="StartingDragonLevelTextBox" HorizontalAlignment="Left" Height="23" Margin="174,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
+        <!--<TextBox x:Name="StartingScoreTextBox" HorizontalAlignment="Left" Height="22" Margin="174,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
+        <!--<TextBox x:Name="StartingHighScoreTextBox" HorizontalAlignment="Left" Height="22" Margin="174,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.108,0.591"/>-->
+        <!--<TextBox x:Name="StartingTurnNumberTextBox" HorizontalAlignment="Left" Height="23" Margin="170,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
+        <TextBox x:Name="CheckGameReputationJsonTextBox" HorizontalAlignment="Left" Height="131" Margin="51,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211"/>
+        <TextBlock x:Name="StartingLivesLabel" HorizontalAlignment="Left" FontSize="16" Margin="119,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Current "/><Run Text="l"/><Run Text="ives:"/></TextBlock>
+        <TextBlock x:Name="StartingGoldLabel" HorizontalAlignment="Left" FontSize="16" Margin="116,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Current "/><Run Text="gold"/><Run Text=":"/></TextBlock>
+        <TextBlock x:Name="StartingDragonLevelLabel" FontSize="16"  HorizontalAlignment="Left" Margin="116,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Dragon "/><Run Text="level"/><Run Text=":"/></TextBlock>
+        <TextBlock x:Name="StartingScoreLabel" FontSize="16" HorizontalAlignment="Left" Margin="111,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Current"/><Run Text=" score:"/></TextBlock>
+        <TextBlock x:Name="StartingHighScoreLabel" FontSize="16" HorizontalAlignment="Left" Margin="134,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.415,0.517"><Run Text="Highsco"/><Run Text="r"/><Run Text="e"/><Run Text=":"/></TextBlock>
+        <TextBlock x:Name="StartingTurnNumberLabel" FontSize="16" HorizontalAlignment="Left" Margin="115,242,0,0" TextWrapping="Wrap" Text="Turn number:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="StartingGameAdventureNameLabel" FontSize="16" HorizontalAlignment="Left"  Margin="45,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Game adventure name:"/></TextBlock>
+        <TextBlock x:Name="GameAdventureNameValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="210,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="GameLivesValueLabel" HorizontalAlignment="Left" FontSize="16" Margin="232,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="GameGoldValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="232,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="GameDragonLevelValue" HorizontalAlignment="Left" FontSize="16" Margin="232,134,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="GameScoreValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="232,173,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="GameHighScoreValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="232,210,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="GameTurnValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="232,242,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <Button x:Name="CheckGameReputationButton" Content="Check reputation!" HorizontalAlignment="Left" Margin="13,36,0,0" VerticalAlignment="Top" Width="122" Click="CheckGameReputationButton_Click" Grid.Column="1" Background="#FFC9B97D"/>
+        <TextBlock x:Name="GameReputationPeopleLabel" FontSize="16" HorizontalAlignment="Left" Margin="53,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"><Run Text="People"/><Run Text=":"/></TextBlock>
+        <TextBlock x:Name="GameReputationStateLabel" FontSize="16" HorizontalAlignment="Left" Margin="63,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="State:" Grid.Column="1"/>
+        <TextBlock x:Name="GameReputationUnderworldLabel" FontSize="16" HorizontalAlignment="Left" Margin="18,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"><Run Text="Underworld"/><Run Text=":"/></TextBlock>
+        <TextBlock x:Name="GameReputationPeopleValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="114,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBlock x:Name="GameReputationStateValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="114,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBlock x:Name="GameReputationUnderWorldValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="114,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button x:Name="CheckForAdventuresButton" Content="Check for adventures to solve!" HorizontalAlignment="Left" Margin="288,82,0,0" VerticalAlignment="Top" Width="184" Height="38" Click="CheckForAdventuresButton_Click" Grid.Column="1" Background="#FFC9B97D"/>
+        <TextBox x:Name="CheckGameAdventureMessagesJsonTextBox" HorizontalAlignment="Left" Height="64" Margin="51,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211"/>
+        <ListBox x:Name="CheckGameAdventureMessagesListBox" HorizontalAlignment="Left" Height="422" Margin="63,134,0,0" VerticalAlignment="Top" Width="674" MouseDoubleClick="CheckGameAdventureMessagesListBox_MouseDoubleClickAsync" Grid.Column="1"/>
+        <TextBox x:Name="CheckGameAdventureSolvingJsonTextBox" HorizontalAlignment="Left" Height="53" Margin="51,391,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211"/>
+        <TextBlock x:Name="MissionWasSuccessfulTextBlock" FontSize="16" HorizontalAlignment="Left" Margin="46,288,0,0" TextWrapping="Wrap" Text="Mission was successful:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="MissionWasSuccessfulValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="215,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="GameShopJsonTextBox" HorizontalAlignment="Left" Margin="62,449,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="45"/>
+        <Button x:Name="GameGoToTheShopButton" Content="Go to the shop!" HorizontalAlignment="Left" Margin="877,90,0,0" VerticalAlignment="Top" Width="118" Height="39" Click="GameGoToTheShopButton_Click" Grid.Column="1" Background="#FFC9B97D"/>
+        <ListBox x:Name="GameShopItemsListBox" Height="291" Margin="791,134,0,0" VerticalAlignment="Top" MouseDoubleClick="GameShopItemsListBox_MouseDoubleClickAsync" Grid.Column="1" HorizontalAlignment="Left" Width="286"/>
+        <TextBlock x:Name="ItemPurchaseWasSuccessfulTextBlock" FontSize="16" HorizontalAlignment="Left" Margin="36,322,0,0" TextWrapping="Wrap" Text="Purchase was successful:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ItemPurchaseWasSuccessfulValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="215,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Label Content="Try to solve the lowest probability, but highest gold reward adventures!" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="164,38,0,0" VerticalAlignment="Top" Width="516"/>
+        <Label Content="Improve your character with buying items!" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Margin="807,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.75,-0.192"/>
+        <!--<TextBox x:Name="StartingGameAdventureNameTextBox" HorizontalAlignment="Left" Height="23" Margin="174,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
+
+    </Grid>
+</Page>
