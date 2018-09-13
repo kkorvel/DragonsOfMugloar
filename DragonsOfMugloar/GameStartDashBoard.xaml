@@ -45,17 +45,17 @@
         <TextBlock x:Name="GameReputationUnderWorldValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="114,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"/>
         <Button x:Name="CheckForAdventuresButton" Content="Check for adventures to solve!" HorizontalAlignment="Left" Margin="288,82,0,0" VerticalAlignment="Top" Width="184" Height="38" Click="CheckForAdventuresButton_Click" Grid.Column="1" Background="#FFC9B97D"/>
         <TextBox x:Name="CheckGameAdventureMessagesJsonTextBox" HorizontalAlignment="Left" Height="64" Margin="51,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211"/>
-        <ListBox x:Name="CheckGameAdventureMessagesListBox" HorizontalAlignment="Left" Height="422" Margin="63,134,0,0" VerticalAlignment="Top" Width="674" MouseDoubleClick="CheckGameAdventureMessagesListBox_MouseDoubleClickAsync" Grid.Column="1"/>
+        <ListBox x:Name="CheckGameAdventureMessagesListBox" HorizontalAlignment="Left" Height="422" Margin="63,134,0,0" VerticalAlignment="Top" Width="617" MouseDoubleClick="CheckGameAdventureMessagesListBox_MouseDoubleClickAsync" Grid.Column="1"/>
         <TextBox x:Name="CheckGameAdventureSolvingJsonTextBox" HorizontalAlignment="Left" Height="53" Margin="51,391,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211"/>
         <TextBlock x:Name="MissionWasSuccessfulTextBlock" FontSize="16" HorizontalAlignment="Left" Margin="46,288,0,0" TextWrapping="Wrap" Text="Mission was successful:" VerticalAlignment="Top"/>
         <TextBlock x:Name="MissionWasSuccessfulValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="215,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:Name="GameShopJsonTextBox" HorizontalAlignment="Left" Margin="62,449,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="45"/>
-        <Button x:Name="GameGoToTheShopButton" Content="Go to the shop!" HorizontalAlignment="Left" Margin="877,90,0,0" VerticalAlignment="Top" Width="118" Height="39" Click="GameGoToTheShopButton_Click" Grid.Column="1" Background="#FFC9B97D"/>
-        <ListBox x:Name="GameShopItemsListBox" Height="291" Margin="791,134,0,0" VerticalAlignment="Top" MouseDoubleClick="GameShopItemsListBox_MouseDoubleClickAsync" Grid.Column="1" HorizontalAlignment="Left" Width="286"/>
+        <Button x:Name="GameGoToTheShopButton" Content="Go to the shop!" HorizontalAlignment="Left" Margin="817,90,0,0" VerticalAlignment="Top" Width="118" Height="39" Click="GameGoToTheShopButton_Click" Grid.Column="1" Background="#FFC9B97D"/>
+        <ListBox x:Name="GameShopItemsListBox" Height="291" Margin="731,134,0,0" VerticalAlignment="Top" MouseDoubleClick="GameShopItemsListBox_MouseDoubleClickAsync" Grid.Column="1" HorizontalAlignment="Left" Width="286"/>
         <TextBlock x:Name="ItemPurchaseWasSuccessfulTextBlock" FontSize="16" HorizontalAlignment="Left" Margin="36,322,0,0" TextWrapping="Wrap" Text="Purchase was successful:" VerticalAlignment="Top"/>
         <TextBlock x:Name="ItemPurchaseWasSuccessfulValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="215,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Label Content="Try to solve the lowest probability, but highest gold reward adventures!" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="164,38,0,0" VerticalAlignment="Top" Width="516"/>
-        <Label Content="Improve your character with buying items!" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Margin="807,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.75,-0.192"/>
+        <Label Content="Improve your character with buying items!" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Margin="747,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.75,-0.192"/>
         <!--<TextBox x:Name="StartingGameAdventureNameTextBox" HorizontalAlignment="Left" Height="23" Margin="174,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
 
     </Grid>

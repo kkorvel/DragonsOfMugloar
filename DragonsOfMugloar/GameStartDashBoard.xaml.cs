@@ -138,6 +138,7 @@ namespace DragonsOfMugloar
             GameGoldValueLabel.Text = gameShopping.gold.ToString();
             GameTurnValueLabel.Text = gameShopping.turn.ToString();
             GameDragonLevelValue.Text = gameShopping.level.ToString();
+            
         }
 
         private async void CheckGameReputationButton_Click(object sender, RoutedEventArgs e)
@@ -368,6 +369,10 @@ namespace DragonsOfMugloar
                 else if (GameLivesValueLabel.Text != 1.ToString())
                 {
                     GameLivesValueLabel.Foreground = new SolidColorBrush(Colors.Black);
+                }
+                if (ItemPurchaseWasSuccessfulValueLabel.Text == "False")
+                {
+                    MessageBox.Show("You don´t have not enough gold, to buy this item!");
                 }
             }
         }
