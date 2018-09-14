@@ -237,13 +237,19 @@ namespace DragonsOfMugloar
 
             }
         }
+        public static bool IsBase64String(string s)
+        {
+            s = s.Trim();
+            return (s.Length % 4 == 0) && System.Text.RegularExpressions.Regex.IsMatch(s, @"^[a-zA-Z0-9\+/]*={0,3}$", System.Text.RegularExpressions.RegexOptions.None);
+
+        }
         public static string Base64Decode(string base64EncodedData)
         {
             
             try
             {
-                //string s = base64EncodedData.Trim().Replace(" ", "+");
-                string s = base64EncodedData.Trim().Replace("-", " ");
+                string s = base64EncodedData.Trim().Replace(" ", "+");
+                //string s = base64EncodedData.Trim().Replace("-", " ");
                 if (s.Length % 4 > 0)
                     s = s.PadRight(s.Length + 4 - s.Length % 4, '=');
                 return Encoding.UTF8.GetString(Convert.FromBase64String(s));
@@ -273,9 +279,23 @@ namespace DragonsOfMugloar
             foreach (GameAdventureMessages messages in correctGameAdventureMessagesJsonList)
             {
                 //kontroll, kas on encrypt parameeter sees, kui on siis lisab selle listboxi
-                if (messages.encrypted != null)
+
+                if (messages.encrypted == null)
                 {
-                    
+                    //ilma encryptita andmed
+                    var adventureMessage =
+
+
+                    ("Adventure id: ") + messages.adId + newline +
+                    ("Message: ") + messages.message + newline +
+                    ("Reward: ") + messages.reward + newline +
+                    ("Expires in: ") + messages.expiresIn + (" turns") + newline +
+                    ("Probability: ") + messages.probability;
+                    CheckGameAdventureMessagesListBox.Items.Add(adventureMessage);
+                }
+                else if (IsBase64String(messages.adId) && IsBase64String(messages.message) && IsBase64String(messages.probability))
+                {
+
                     var adventureMessage =
                     ("Adventure id: ") + base64Decode(messages.adId) + newline +
                     ("Message: ") + base64Decode(messages.message) + newline +
@@ -285,19 +305,55 @@ namespace DragonsOfMugloar
                     ("Probability: ") + base64Decode(messages.probability);
                     CheckGameAdventureMessagesListBox.Items.Add(adventureMessage);
                 }
-                else
+                else if(!IsBase64String(messages.adId) && !IsBase64String(messages.message) && !IsBase64String(messages.probability))
                 {
-                    //ilma encryptita andmed
                     var adventureMessage =
-                    
-                    
-                    ("Adventure id: ") + messages.adId + newline +
-                    ("Message: ") + messages.message + newline +
+                    ("Adventure id: ") + base64Decode(messages.adId) + newline +
+                    ("Message: ") + base64Decode(messages.message) + newline +
                     ("Reward: ") + messages.reward + newline +
                     ("Expires in: ") + messages.expiresIn + (" turns") + newline +
-                    ("Probability: ") + messages.probability;
-                    CheckGameAdventureMessagesListBox.Items.Add(adventureMessage);
+                    ("Encryption: ") + messages.encrypted + newline +
+                    ("Probability: ") + base64Decode(messages.probability);
+                    CheckGameAdventureMessagesListBox.Items.Remove(adventureMessage);
                 }
+
+                //if (messages.encrypted != null && IsBase64String(messages.ToString()))
+                //{
+
+                //    var adventureMessage =
+                //    ("Adventure id: ") + base64Decode(messages.adId) + newline +
+                //    ("Message: ") + base64Decode(messages.message) + newline +
+                //    ("Reward: ") + messages.reward + newline +
+                //    ("Expires in: ") + messages.expiresIn + (" turns") + newline +
+                //    ("Encryption: ") + messages.encrypted + newline +
+                //    ("Probability: ") + base64Decode(messages.probability);
+                //    CheckGameAdventureMessagesListBox.Items.Add(adventureMessage);
+                //}
+                //else
+                //{
+                //    var adventureMessage =
+                //    ("Adventure id: ") + base64Decode(messages.adId) + newline +
+                //    ("Message: ") + base64Decode(messages.message) + newline +
+                //    ("Reward: ") + messages.reward + newline +
+                //    ("Expires in: ") + messages.expiresIn + (" turns") + newline +
+                //    ("Encryption: ") + messages.encrypted + newline +
+                //    ("Probability: ") + base64Decode(messages.probability);
+                //    CheckGameAdventureMessagesListBox.Items.Remove(adventureMessage);
+                //}
+
+                //if(messages.encrypted == null)
+                //{
+                //    //ilma encryptita andmed
+                //    var adventureMessage =
+
+
+                //    ("Adventure id: ") + messages.adId + newline +
+                //    ("Message: ") + messages.message + newline +
+                //    ("Reward: ") + messages.reward + newline +
+                //    ("Expires in: ") + messages.expiresIn + (" turns") + newline +
+                //    ("Probability: ") + messages.probability;
+                //    CheckGameAdventureMessagesListBox.Items.Add(adventureMessage);
+                //}
             }
         }
 
