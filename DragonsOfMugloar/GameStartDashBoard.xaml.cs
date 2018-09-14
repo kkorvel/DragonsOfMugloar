@@ -208,32 +208,44 @@ namespace DragonsOfMugloar
 
             string adventureMessages = webClient.DownloadString(currentGameAdventureMessagesURL);
             CheckGameAdventureMessagesJsonTextBox.Text = adventureMessages;
-
+            
 
             DeserializeGameAdventureMessagesData(CheckGameAdventureMessagesJsonTextBox.Text);
 
         }
+        public static string Base64Decode(string base64EncodedData)
+        {
+            //töötab
+            string s = base64EncodedData.Trim().Replace(" ", "+");
+            if (s.Length % 4 > 0)
+                s = s.PadRight(s.Length + 4 - s.Length % 4, '=');
+            return Encoding.UTF8.GetString(Convert.FromBase64String(s));
 
+
+            //viga lõi sisse “Invalid length for a Base-64 char array” see alumine osa
+            //var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            //return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
         private void DeserializeGameAdventureMessagesData(string JSON)
         {
             var newline = Environment.NewLine;
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             List<GameAdventureMessages> correctGameAdventureMessagesJsonList = (List<GameAdventureMessages>)javaScriptSerializer.Deserialize(JSON, typeof(List<GameAdventureMessages>));
-
+            
             foreach (GameAdventureMessages messages in correctGameAdventureMessagesJsonList)
             {
                 //kontroll, kas on encrypt parameeter sees, kui on siis kustutab selle ära
                 if (messages.encrypted != null)
                 {
-                    //MessageBox.Show(messages.encrypted.ToString());
+                    
                     var adventureMessage =
-                    ("Adventure id: ") + messages.adId + newline +
-                    ("Message: ") + messages.message + newline +
+                    ("Adventure id: ") + Base64Decode(messages.adId) + newline +
+                    ("Message: ") + Base64Decode(messages.message) + newline +
                     ("Reward: ") + messages.reward + newline +
                     ("Expires in: ") + messages.expiresIn + (" turns") + newline +
                     ("Encryption: ") + messages.encrypted + newline +
-                    ("Probability: ") + messages.probability;
-                    CheckGameAdventureMessagesListBox.Items.Remove(adventureMessage);
+                    ("Probability: ") + Base64Decode(messages.probability);
+                    CheckGameAdventureMessagesListBox.Items.Add(adventureMessage);
                 }
                 else
                 {
@@ -279,12 +291,32 @@ namespace DragonsOfMugloar
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             List<GameAdventureMessages> correctGameAdventureMessagesJsonList = (List<GameAdventureMessages>)javaScriptSerializer.Deserialize(CheckGameAdventureMessagesJsonTextBox.Text, typeof(List<GameAdventureMessages>));
 
+            string selectedAdventure = CheckGameAdventureMessagesListBox.SelectedItem.ToString();
             foreach (GameAdventureMessages message in correctGameAdventureMessagesJsonList)
             {
-                string selectedAdventure = CheckGameAdventureMessagesListBox.SelectedItem.ToString();
+
+
+                if (message.adId.Contains("="))
+                {
+                    message.adId = Base64Decode(message.adId);
+                    
+                }
+                else if(!message.adId.Contains("="))
+                {
+                    message.adId = message.adId;
+                }
+                
                 if (selectedAdventure.Contains(message.adId))
                 {
+                    if (message.adId.Contains("="))
+                    {
+                        DataContainer.selectedAdventureID = Base64Decode(message.adId);
+                    }
+                    else
+                    {
+
                     DataContainer.selectedAdventureID = message.adId;
+                    }
                     GameAdventureNameValueLabel.Text = DataContainer.currentGameId;
                     HttpClient httpClient = new HttpClient();
 
@@ -300,10 +332,11 @@ namespace DragonsOfMugloar
                      };
 
                     var postContent = new FormUrlEncodedContent(value);
+                    //MessageBox.Show(postContent.ToString());
                     //var response = httpClient.PostAsync(correctNewSiteURL, content);
 
                     var response = await httpClient.PostAsync(currentGameReputationURL, postContent);
-                    //exception 400 bad request vms
+                    //exception 400 bad request vms, uuendatud koodis viga ei esine
                     //response.EnsureSuccessStatusCode();
 
                     if (response.IsSuccessStatusCode)
@@ -312,9 +345,10 @@ namespace DragonsOfMugloar
                     //labelite uuendamine
                     string content = await response.Content.ReadAsStringAsync();
                     CheckGameAdventureSolvingJsonTextBox.Text = content;
-                        
+                        //MessageBox.Show(content);
                     //DeserializeGameData(CheckGameAdventureSolvingJsonTextBox.Text);
                     MissionWasSuccessful(CheckGameAdventureSolvingJsonTextBox.Text);
+                        //MessageBox.Show(response.ToString());
 
                     }
                     else
@@ -322,8 +356,10 @@ namespace DragonsOfMugloar
                         MessageBox.Show("Something went wrong with adventure (id:" + DataContainer.selectedAdventureID + ")! Please choose another mission!");
                     }
 
+                
 
                 }
+    
             }
         }
 
