@@ -76,6 +76,8 @@ namespace DragonsOfMugloar
         {
             CheckGameAdventureMessagesListBox.Items.Clear();
             GameShopItemsListBox.Items.Clear();
+            //MissionWasSuccessfulValueLabel.Text = null;
+            //ItemPurchaseWasSuccessfulValueLabel = null
             await GetGameDataJson();
         }
 
@@ -216,15 +218,45 @@ namespace DragonsOfMugloar
         public static string Base64Decode(string base64EncodedData)
         {
             //töötab
-            string s = base64EncodedData.Trim().Replace(" ", "+");
-            if (s.Length % 4 > 0)
-                s = s.PadRight(s.Length + 4 - s.Length % 4, '=');
-            return Encoding.UTF8.GetString(Convert.FromBase64String(s));
+            try
+            {
+                string s = base64EncodedData.Trim().Replace(" ", "+");
+                if (s.Length % 4 > 0)
+                    s = s.PadRight(s.Length + 4 - s.Length % 4, '=');
+                return Encoding.UTF8.GetString(Convert.FromBase64String(s));
+            }
+            catch ( Exception e)
+            {
+
+                throw new Exception("Error in decoding " + e.Message);
+            }
+            
+            //string converted = base64EncodedData.Replace('-', '+');
+            //string converted = s.Replace('-', '+');
+            //converted = converted.Replace('_', '/');
+            //converted = converted.Replace('_', '/');
+            //return Encoding.UTF8.GetString(Convert.FromBase64String(converted));
 
 
             //viga lõi sisse “Invalid length for a Base-64 char array” see alumine osa
             //var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
             //return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+        public static string Base64AndUtf8Encode(string text)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
+        }
+
+        public static string Base64AndUtf8Decode(string base64)
+        {
+            return Encoding.UTF8.GetString(Convert.FromBase64String(base64));
+        }
+        public static string ToUtf8(string text)
+        {
+            string input = text.ToString();
+            byte[] array = Encoding.UTF8.GetBytes(input);
+            string correctUTF8 = Encoding.UTF8.GetString(array);
+            return correctUTF8;
         }
         private void DeserializeGameAdventureMessagesData(string JSON)
         {
@@ -239,12 +271,12 @@ namespace DragonsOfMugloar
                 {
                     
                     var adventureMessage =
-                    ("Adventure id: ") + Base64Decode(messages.adId) + newline +
-                    ("Message: ") + Base64Decode(messages.message) + newline +
+                    ("Adventure id: ") + Base64AndUtf8Decode(messages.adId) + newline +
+                    ("Message: ") + Base64AndUtf8Decode(messages.message) + newline +
                     ("Reward: ") + messages.reward + newline +
                     ("Expires in: ") + messages.expiresIn + (" turns") + newline +
                     ("Encryption: ") + messages.encrypted + newline +
-                    ("Probability: ") + Base64Decode(messages.probability);
+                    ("Probability: ") + Base64AndUtf8Decode(messages.probability);
                     CheckGameAdventureMessagesListBox.Items.Add(adventureMessage);
                 }
                 else
