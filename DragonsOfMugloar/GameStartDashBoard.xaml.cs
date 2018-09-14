@@ -232,7 +232,9 @@ namespace DragonsOfMugloar
             }
             catch (Exception e)
             {
+                MessageBox.Show(e.ToString());
                 throw new Exception("Error in base64Decode" + e.Message);
+
             }
         }
         public static string Base64Decode(string base64EncodedData)

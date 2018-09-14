@@ -37,3 +37,4 @@ D:\Kool\DragonsOfMugloar\DragonsOfMugloar\DragonsOfMugloar\obj\Debug\DragonsOfMu
 D:\Kool\DragonsOfMugloar\DragonsOfMugloar\DragonsOfMugloar\obj\Debug\DragonsOfMugloar.csproj.CoreCompileInputs.cache
 D:\Kool\DragonsOfMugloar\DragonsOfMugloar\DragonsOfMugloar\obj\Debug\DragonsOfMugloar.exe
 D:\Kool\DragonsOfMugloar\DragonsOfMugloar\DragonsOfMugloar\obj\Debug\DragonsOfMugloar.pdb
+D:\Kool\DragonsOfMugloar\DragonsOfMugloar\DragonsOfMugloar\obj\Debug\DragonsOfMugloar.csprojAssemblyReference.cache
