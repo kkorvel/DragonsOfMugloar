@@ -215,12 +215,33 @@ namespace DragonsOfMugloar
             DeserializeGameAdventureMessagesData(CheckGameAdventureMessagesJsonTextBox.Text);
 
         }
-        public static string Base64Decode(string base64EncodedData)
+        public string base64Decode(string data)
         {
-            //töötab
+            //siiani on töötanud
             try
             {
-                string s = base64EncodedData.Trim().Replace(" ", "+");
+                System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
+                System.Text.Decoder utf8Decode = encoder.GetDecoder();
+
+                byte[] todecode_byte = Convert.FromBase64String(data);
+                int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
+                char[] decoded_char = new char[charCount];
+                utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
+                string result = new String(decoded_char);
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error in base64Decode" + e.Message);
+            }
+        }
+        public static string Base64Decode(string base64EncodedData)
+        {
+            
+            try
+            {
+                //string s = base64EncodedData.Trim().Replace(" ", "+");
+                string s = base64EncodedData.Trim().Replace("-", " ");
                 if (s.Length % 4 > 0)
                     s = s.PadRight(s.Length + 4 - s.Length % 4, '=');
                 return Encoding.UTF8.GetString(Convert.FromBase64String(s));
@@ -230,27 +251,9 @@ namespace DragonsOfMugloar
 
                 throw new Exception("Error in decoding " + e.Message);
             }
-            
-            //string converted = base64EncodedData.Replace('-', '+');
-            //string converted = s.Replace('-', '+');
-            //converted = converted.Replace('_', '/');
-            //converted = converted.Replace('_', '/');
-            //return Encoding.UTF8.GetString(Convert.FromBase64String(converted));
-
-
-            //viga lõi sisse “Invalid length for a Base-64 char array” see alumine osa
-            //var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-            //return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+ 
         }
-        public static string Base64AndUtf8Encode(string text)
-        {
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
-        }
-
-        public static string Base64AndUtf8Decode(string base64)
-        {
-            return Encoding.UTF8.GetString(Convert.FromBase64String(base64));
-        }
+       
         public static string ToUtf8(string text)
         {
             string input = text.ToString();
@@ -258,6 +261,7 @@ namespace DragonsOfMugloar
             string correctUTF8 = Encoding.UTF8.GetString(array);
             return correctUTF8;
         }
+        
         private void DeserializeGameAdventureMessagesData(string JSON)
         {
             var newline = Environment.NewLine;
@@ -266,24 +270,24 @@ namespace DragonsOfMugloar
             
             foreach (GameAdventureMessages messages in correctGameAdventureMessagesJsonList)
             {
-                //kontroll, kas on encrypt parameeter sees, kui on siis kustutab selle ära
+                //kontroll, kas on encrypt parameeter sees, kui on siis lisab selle listboxi
                 if (messages.encrypted != null)
                 {
                     
                     var adventureMessage =
-                    ("Adventure id: ") + Base64AndUtf8Decode(messages.adId) + newline +
-                    ("Message: ") + Base64AndUtf8Decode(messages.message) + newline +
+                    ("Adventure id: ") + base64Decode(messages.adId) + newline +
+                    ("Message: ") + base64Decode(messages.message) + newline +
                     ("Reward: ") + messages.reward + newline +
                     ("Expires in: ") + messages.expiresIn + (" turns") + newline +
                     ("Encryption: ") + messages.encrypted + newline +
-                    ("Probability: ") + Base64AndUtf8Decode(messages.probability);
+                    ("Probability: ") + base64Decode(messages.probability);
                     CheckGameAdventureMessagesListBox.Items.Add(adventureMessage);
                 }
                 else
                 {
-                    //ilma encryptita
+                    //ilma encryptita andmed
                     var adventureMessage =
-                    //Ecrypted on koguaeg null, kui encrypted parameetriga adventure valida, siis viskabki http400.
+                    
                     
                     ("Adventure id: ") + messages.adId + newline +
                     ("Message: ") + messages.message + newline +
@@ -364,7 +368,7 @@ namespace DragonsOfMugloar
                      };
 
                     var postContent = new FormUrlEncodedContent(value);
-                    //MessageBox.Show(postContent.ToString());
+                    
                     //var response = httpClient.PostAsync(correctNewSiteURL, content);
 
                     var response = await httpClient.PostAsync(currentGameReputationURL, postContent);
@@ -377,10 +381,10 @@ namespace DragonsOfMugloar
                     //labelite uuendamine
                     string content = await response.Content.ReadAsStringAsync();
                     CheckGameAdventureSolvingJsonTextBox.Text = content;
-                        //MessageBox.Show(content);
+                    
                     //DeserializeGameData(CheckGameAdventureSolvingJsonTextBox.Text);
                     MissionWasSuccessful(CheckGameAdventureSolvingJsonTextBox.Text);
-                        //MessageBox.Show(response.ToString());
+                        
 
                     }
                     else
@@ -473,7 +477,7 @@ namespace DragonsOfMugloar
             foreach (GameShopItemsJson.ShopItems shopItems in correctGameShopItemsJsonList)
             {
                 string selectedShopItem = GameShopItemsListBox.SelectedItem.ToString();
-                //MessageBox.Show(shopItems.id);
+                
                 if (selectedShopItem.Contains(shopItems.id))
                 {
                     DataContainer.currentGameShopItemId = shopItems.id;

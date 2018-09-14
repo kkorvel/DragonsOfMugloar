@@ -54,7 +54,7 @@
         <ListBox x:Name="GameShopItemsListBox" Height="304" Margin="656,134,0,0" VerticalAlignment="Top" MouseDoubleClick="GameShopItemsListBox_MouseDoubleClickAsync" Grid.Column="1" HorizontalAlignment="Left" Width="286"/>
         <TextBlock x:Name="ItemPurchaseWasSuccessfulTextBlock" FontSize="16" HorizontalAlignment="Left" Margin="36,322,0,0" TextWrapping="Wrap" Text="Purchase was successful:" VerticalAlignment="Top"/>
         <TextBlock x:Name="ItemPurchaseWasSuccessfulValueLabel" FontSize="16" HorizontalAlignment="Left" Margin="215,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Label Content="Try to solve the highest probability, but highest gold reward adventures!" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="114,38,0,0" VerticalAlignment="Top" Width="516"/>
+        <Label Content="Try to solve the highest probability and highest gold reward adventures!" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" Margin="114,38,0,0" VerticalAlignment="Top" Width="516"/>
         <Label Content="Improve your character with buying items!" Grid.Column="1" HorizontalAlignment="Left" FontSize="16" Margin="671,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.75,-0.192"/>
         <!--<TextBox x:Name="StartingGameAdventureNameTextBox" HorizontalAlignment="Left" Height="23" Margin="174,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>-->
 
