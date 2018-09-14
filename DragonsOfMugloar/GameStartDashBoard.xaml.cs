@@ -222,10 +222,10 @@ namespace DragonsOfMugloar
 
             foreach (GameAdventureMessages messages in correctGameAdventureMessagesJsonList)
             {
-                //kontroll, kas on encrypt parameeter sees, kui on siis kustutab selle ära listboxist
+                //kontroll, kas on encrypt parameeter sees, kui on siis kustutab selle ära
                 if (messages.encrypted != null)
                 {
-                    MessageBox.Show(messages.encrypted.ToString());
+                    //MessageBox.Show(messages.encrypted.ToString());
                     var adventureMessage =
                     ("Adventure id: ") + messages.adId + newline +
                     ("Message: ") + messages.message + newline +
@@ -240,7 +240,7 @@ namespace DragonsOfMugloar
                     //ilma encryptita
                     var adventureMessage =
                     //Ecrypted on koguaeg null, kui encrypted parameetriga adventure valida, siis viskabki http400.
-                    //messages.encrypted = null + newline +
+                    
                     ("Adventure id: ") + messages.adId + newline +
                     ("Message: ") + messages.message + newline +
                     ("Reward: ") + messages.reward + newline +
@@ -378,6 +378,7 @@ namespace DragonsOfMugloar
                 //DeserializeGameData(GameDataJsonTextBox.Text);
                 await ShopGameItems();
                 CheckGameShopItems();
+                CheckForAdventures();
                 //DeserializeGameShopItemsData(GameShopJsonTextBox.Text);
                 if (GameLivesValueLabel.Text == 1.ToString())
                 {
@@ -390,8 +391,6 @@ namespace DragonsOfMugloar
                 if (ItemPurchaseWasSuccessfulValueLabel.Text == "False")
                 {
                     MessageBox.Show("You don´t have not enough gold, to buy this item!");
-                    //kui ostmine on ebaõnnestunud, siis käik läheb edasi, tulevad uued adventured
-                    //Sellega kadus ka ära see jama, kus tuli http 400, sest käik oli juba möödas
                     CheckForAdventures();
                 }
             }
