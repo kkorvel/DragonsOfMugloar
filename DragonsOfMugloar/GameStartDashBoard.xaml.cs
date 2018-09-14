@@ -272,6 +272,8 @@ namespace DragonsOfMugloar
         
         private void DeserializeGameAdventureMessagesData(string JSON)
         {
+            //eelnevatest andmetest puhastamine, muidu tuli rohkem kui 10 missiooni, tuli näiteks 10+10, ehk siis dubleeritud.
+            CheckGameAdventureMessagesListBox.Items.Clear();
             var newline = Environment.NewLine;
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             List<GameAdventureMessages> correctGameAdventureMessagesJsonList = (List<GameAdventureMessages>)javaScriptSerializer.Deserialize(JSON, typeof(List<GameAdventureMessages>));
